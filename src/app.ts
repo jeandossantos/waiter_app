@@ -1,12 +1,14 @@
 import './app/connection/mongoose';
 import 'express-async-errors';
-
+import path from 'node:path';
 import express, { Request, Response, NextFunction } from 'express';
 import { routes } from './routes';
+
 import { CustomException } from './app/exceptions/CustomException';
 
 const app = express();
 app.use(express.json());
+app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 app.use(routes);
 
 app.use(

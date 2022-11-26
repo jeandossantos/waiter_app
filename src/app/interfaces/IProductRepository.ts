@@ -9,7 +9,8 @@ export interface IProductRepository {
     imagePath,
     price,
     ingredients,
-  }: Omit<IProduct, 'category' | '_id'> & {
+  }: Omit<IProduct, 'category'> & {
     category: string;
   }): Promise<IProduct>;
+  findByCategory: (categoryId: string) => Promise<IProduct[]>;
 }

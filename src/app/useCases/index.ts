@@ -8,6 +8,8 @@ import { CreateProductController } from './products/CreateProduct/CreateProductC
 import { CreateProductUseCase } from './products/CreateProduct/CreateProductUseCase';
 import { ListProductsController } from './products/ListProducts/ListProductsController';
 import { ListProductsUseCase } from './products/ListProducts/ListProductsUseCase';
+import { ListProductsByCategoryController } from './products/ListProductsByCategory/ListProductsByCategoryController';
+import { ListProductsByCategoryUseCase } from './products/ListProductsByCategory/ListProductsByCategoryUseCase';
 
 const categoryRepository = new CategoryRepository();
 const productRepository = new ProductRepository();
@@ -30,9 +32,17 @@ const createProductController = new CreateProductController(
   createProductUseCase
 );
 
+const listProductsByCategoryUseCase = new ListProductsByCategoryUseCase(
+  productRepository
+);
+const listProductsByCategoryController = new ListProductsByCategoryController(
+  listProductsByCategoryUseCase
+);
+
 export {
   listCategoriesController,
   createCategoryController,
   listProductsController,
   createProductController,
+  listProductsByCategoryController,
 };

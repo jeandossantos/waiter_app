@@ -29,4 +29,10 @@ export class ProductRepository implements IProductRepository {
 
     return products;
   }
+
+  async findByCategory(categoryId: string) {
+    const products = await Product.find({}).where('category', categoryId);
+
+    return products;
+  }
 }

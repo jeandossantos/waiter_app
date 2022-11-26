@@ -6,6 +6,7 @@ import {
   listCategoriesController,
   listProductsController,
   createProductController,
+  listProductsByCategoryController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -20,6 +21,10 @@ routes.post('/categories', (req, res) => {
 
 routes.get('/products', (req, res) => {
   return listProductsController.handle(req, res);
+});
+
+routes.get('/categories/:categoryId/products', (req, res) => {
+  return listProductsByCategoryController.handle(req, res);
 });
 
 routes.post('/products', upload.single('image'), (req, res) => {
