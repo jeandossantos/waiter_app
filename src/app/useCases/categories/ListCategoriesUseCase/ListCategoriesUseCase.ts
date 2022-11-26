@@ -1,10 +1,10 @@
-import { CustomException } from '../../../exceptions/CustomException';
-import { CategoryRepository } from './CategoryRepository';
+import { ICategory } from '../../../models/Category';
+import { ICategoryRepository } from './ICategoryInterface';
 
 export class ListCategoriesUseCase {
-  constructor(private categoryRepository: CategoryRepository) {}
+  constructor(private categoryRepository: ICategoryRepository) {}
 
-  async execute() {
+  async execute(): Promise<ICategory[]> {
     const categories = await this.categoryRepository.find();
 
     return categories;
