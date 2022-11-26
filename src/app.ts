@@ -20,6 +20,7 @@ app.use(
       return res.status(error.code).json({
         message: error.message,
         code: error.code,
+        name: error.name,
       });
     }
 

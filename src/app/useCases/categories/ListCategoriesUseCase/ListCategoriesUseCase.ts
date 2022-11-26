@@ -1,3 +1,4 @@
+import { CustomException } from '../../../exceptions/CustomException';
 import { CategoryRepository } from './CategoryRepository';
 
 export class ListCategoriesUseCase {

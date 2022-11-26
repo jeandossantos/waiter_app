@@ -5,6 +5,6 @@ export class CustomException extends Error {
     super(message);
 
     this.code = code;
-    this.name = this.name;
+    this.name = this.constructor.name;
   }
 }
