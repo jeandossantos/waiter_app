@@ -1,8 +1,11 @@
 import { Router } from 'express';
+import { upload } from './app/config/multer';
+
 import {
   createCategoryController,
   listCategoriesController,
   listProductsController,
+  createProductController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -17,4 +20,8 @@ routes.post('/categories', (req, res) => {
 
 routes.get('/products', (req, res) => {
   return listProductsController.handle(req, res);
+});
+
+routes.post('/products', upload.single('image'), (req, res) => {
+  return createProductController.handle(req, res);
 });
