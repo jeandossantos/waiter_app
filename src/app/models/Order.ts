@@ -5,10 +5,11 @@ export interface IOrder {
   _id: string;
   table: string;
   status: 'WAITING' | 'IN_PROGRESS' | 'DONE';
-  product: IProduct;
+  product: IProduct[];
+  createdAt: Date;
 }
 
-export const Order = model(
+export const Order = model<IOrder>(
   'Order',
   new Schema({
     table: {
