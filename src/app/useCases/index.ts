@@ -5,8 +5,10 @@ import { CreateCategoryController } from './categories/CreateCategory/CreateCate
 import { CreateCategoryUseCase } from './categories/CreateCategory/CreateCategoryUseCase';
 import { ListCategoriesController } from './categories/ListCategories/ListCategoriesController';
 import { ListCategoriesUseCase } from './categories/ListCategories/ListCategoriesUseCase';
-import { CreateOrderController } from './orders/createOrder/CreateOrderController';
-import { CreateOrderUseCase } from './orders/createOrder/CreateOrderUseCase';
+import { ChangeOrderStatusController } from './orders/ChangeOrderStatus/ChangeOrderStatusController';
+import { ChangeOrderStatusUseCase } from './orders/ChangeOrderStatus/ChangeOrderStatusUseCase';
+import { CreateOrderController } from './orders/CreateOrder/CreateOrderController';
+import { CreateOrderUseCase } from './orders/CreateOrder/CreateOrderUseCase';
 import { ListOrdersController } from './orders/ListOrders/ListOrdersController';
 import { ListOrdersUseCase } from './orders/ListOrders/ListOrdersUseCase';
 import { CreateProductController } from './products/CreateProduct/CreateProductController';
@@ -51,6 +53,11 @@ const listOrdersController = new ListOrdersController(listOrdersUseCase);
 const createOrderUseCase = new CreateOrderUseCase(orderRepository);
 const createOrderController = new CreateOrderController(createOrderUseCase);
 
+const changeOrderStatusUseCase = new ChangeOrderStatusUseCase(orderRepository);
+const changeOrderStatusController = new ChangeOrderStatusController(
+  changeOrderStatusUseCase
+);
+
 export {
   listCategoriesController,
   createCategoryController,
@@ -59,4 +66,5 @@ export {
   listProductsByCategoryController,
   listOrdersController,
   createOrderController,
+  changeOrderStatusController,
 };

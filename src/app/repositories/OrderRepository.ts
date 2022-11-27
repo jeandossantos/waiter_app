@@ -1,4 +1,5 @@
 import {
+  ChangeStatusProps,
   CreateOrderProps,
   IOrderRepository,
 } from '../interfaces/IOrderRepository';
@@ -21,5 +22,16 @@ export class OrderRepository implements IOrderRepository {
     });
 
     return await orders.save();
+  }
+
+  async changeStatus({ status, orderId }: ChangeStatusProps): Promise<void> {
+    await Order.findOneAndUpdate(
+      {
+        _id: orderId,
+      },
+      {
+        status,
+      }
+    );
   }
 }

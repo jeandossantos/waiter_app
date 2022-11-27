@@ -9,6 +9,7 @@ import {
   listProductsByCategoryController,
   listOrdersController,
   createOrderController,
+  changeOrderStatusController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -39,4 +40,8 @@ routes.post('/orders', (req, res) => {
 
 routes.get('/orders', (req, res) => {
   return listOrdersController.handle(req, res);
+});
+
+routes.patch('/orders/:orderId', (req, res) => {
+  return changeOrderStatusController.handle(req, res);
 });
