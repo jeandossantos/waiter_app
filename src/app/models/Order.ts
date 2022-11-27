@@ -5,7 +5,7 @@ export interface IOrder {
   _id: string;
   table: string;
   status: 'WAITING' | 'IN_PROGRESS' | 'DONE';
-  product: IProduct[];
+  products: IProduct[];
   createdAt: Date;
 }
 
@@ -25,7 +25,7 @@ export const Order = model<IOrder>(
       type: Date,
       default: Date.now,
     },
-    product: {
+    products: {
       required: true,
       type: [
         {
