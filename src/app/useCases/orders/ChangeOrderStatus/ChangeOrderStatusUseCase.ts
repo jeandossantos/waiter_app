@@ -1,10 +1,10 @@
 import { CustomException } from '../../../exceptions/CustomException';
-import { OrderRepository } from '../../../repositories/OrderRepository';
+import { IOrderRepository } from '../../../interfaces/IOrderRepository';
 
 type ChangeOrderStatusUseCaseProps = { status: string; orderId: string };
 
 export class ChangeOrderStatusUseCase {
-  constructor(private orderRepository: OrderRepository) {}
+  constructor(private orderRepository: IOrderRepository) {}
 
   async execute({ status, orderId }: ChangeOrderStatusUseCaseProps) {
     const isStatusValid = ['WAITING', 'IN_PROGRESS', 'DONE'].includes(status);

@@ -13,4 +13,8 @@ export class CategoryRepository implements ICategoryRepository {
 
     return categories;
   }
+
+  async delete(categoryId: string): Promise<void> {
+    await Category.findOneAndDelete({ _id: categoryId });
+  }
 }

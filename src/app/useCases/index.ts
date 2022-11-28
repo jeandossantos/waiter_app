@@ -3,6 +3,8 @@ import { OrderRepository } from '../repositories/OrderRepository';
 import { ProductRepository } from '../repositories/ProductRepository';
 import { CreateCategoryController } from './categories/CreateCategory/CreateCategoryController';
 import { CreateCategoryUseCase } from './categories/CreateCategory/CreateCategoryUseCase';
+import { DeleteCategoryController } from './categories/DeleteCategory/DeleteCategoryController';
+import { DeleteCategoryUseCase } from './categories/DeleteCategory/DeleteCategoryUseCase';
 import { ListCategoriesController } from './categories/ListCategories/ListCategoriesController';
 import { ListCategoriesUseCase } from './categories/ListCategories/ListCategoriesUseCase';
 import { ChangeOrderStatusController } from './orders/ChangeOrderStatus/ChangeOrderStatusController';
@@ -34,6 +36,12 @@ const createCategoryController = new CreateCategoryController(
   createCategoryUseCase
 );
 
+const deleteCategoryUseCase = new DeleteCategoryUseCase(categoryRepository);
+const deleteCategoryController = new DeleteCategoryController(
+  deleteCategoryUseCase
+);
+
+// product
 const listProductsUseCase = new ListProductsUseCase(productRepository);
 const listProductsController = new ListProductsController(listProductsUseCase);
 
@@ -49,6 +57,7 @@ const listProductsByCategoryController = new ListProductsByCategoryController(
   listProductsByCategoryUseCase
 );
 
+// order
 const listOrdersUseCase = new ListOrdersUseCase(orderRepository);
 const listOrdersController = new ListOrdersController(listOrdersUseCase);
 
@@ -66,6 +75,7 @@ const deleteOrderController = new DeleteOrderController(deleteOrderUseCase);
 export {
   listCategoriesController,
   createCategoryController,
+  deleteCategoryController,
   listProductsController,
   createProductController,
   listProductsByCategoryController,

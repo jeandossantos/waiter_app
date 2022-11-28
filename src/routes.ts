@@ -11,6 +11,7 @@ import {
   createOrderController,
   changeOrderStatusController,
   deleteOrderController,
+  deleteCategoryController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -21,6 +22,10 @@ routes.get('/categories', (req, res) => {
 
 routes.post('/categories', (req, res) => {
   return createCategoryController.handle(req, res);
+});
+
+routes.delete('/categories/:categoryId', (req, res) => {
+  return deleteCategoryController.handle(req, res);
 });
 
 routes.get('/products', (req, res) => {
