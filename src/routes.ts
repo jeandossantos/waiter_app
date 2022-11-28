@@ -10,6 +10,7 @@ import {
   listOrdersController,
   createOrderController,
   changeOrderStatusController,
+  deleteOrderController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -44,4 +45,8 @@ routes.get('/orders', (req, res) => {
 
 routes.patch('/orders/:orderId', (req, res) => {
   return changeOrderStatusController.handle(req, res);
+});
+
+routes.delete('/orders/:orderId', (req, res) => {
+  return deleteOrderController.handle(req, res);
 });

@@ -10,4 +10,5 @@ export interface IOrderRepository {
   find(): Promise<IOrder[]>;
   create({ table, products, status }: CreateOrderProps): Promise<IOrder>;
   changeStatus({ status, orderId }: ChangeStatusProps): Promise<void>;
+  delete(orderId: string): Promise<void>;
 }

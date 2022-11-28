@@ -6,7 +6,7 @@ import {
 import { IOrder, Order } from '../models/Order';
 
 export class OrderRepository implements IOrderRepository {
-  async find() {
+  async find(): Promise<IOrder[]> {
     const orders = await Order.find({})
       .populate('products.product')
       .sort({ createdAt: 1 });
@@ -33,5 +33,9 @@ export class OrderRepository implements IOrderRepository {
         status,
       }
     );
+  }
+
+  async delete(orderId: string): Promise<void> {
+    await Order.findOneAndDelete({ _id: orderId });
   }
 }
