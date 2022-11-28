@@ -1,4 +1,7 @@
-import { IProductRepository } from '../interfaces/IProductRepository';
+import {
+  CreateProductProps,
+  IProductRepository,
+} from '../interfaces/IProductRepository';
 import { IProduct, Product } from '../models/Product';
 
 export class ProductRepository implements IProductRepository {
@@ -9,9 +12,7 @@ export class ProductRepository implements IProductRepository {
     imagePath,
     price,
     ingredients,
-  }: Omit<IProduct, 'category' | '_id'> & {
-    category: string;
-  }) {
+  }: CreateProductProps) {
     const product = new Product({
       name,
       category,

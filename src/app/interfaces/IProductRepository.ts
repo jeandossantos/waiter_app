@@ -1,5 +1,9 @@
 import { IProduct } from '../models/Product';
 
+export type CreateProductProps = Omit<IProduct, 'category' | '_id'> & {
+  category: string;
+};
+
 export interface IProductRepository {
   find(): Promise<IProduct[]>;
   create({
@@ -9,8 +13,6 @@ export interface IProductRepository {
     imagePath,
     price,
     ingredients,
-  }: Omit<IProduct, 'category'> & {
-    category: string;
-  }): Promise<IProduct>;
+  }: CreateProductProps): Promise<IProduct>;
   findByCategory: (categoryId: string) => Promise<IProduct[]>;
 }

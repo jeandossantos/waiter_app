@@ -5,7 +5,7 @@ export class CreateProductController {
   constructor(private createProductUseCase: CreateProductUseCase) {}
 
   async handle(req: Request, res: Response) {
-    const { name, description, price, category, ingredients = [] } = req.body;
+    const { name, description, price, category, ingredients } = req.body;
     const imagePath = req.file?.filename || '';
 
     const product = await this.createProductUseCase.execute({
@@ -13,7 +13,7 @@ export class CreateProductController {
       description,
       price: Number(price),
       category,
-      ingredients: JSON.parse(ingredients),
+      ingredients,
       imagePath,
     });
 

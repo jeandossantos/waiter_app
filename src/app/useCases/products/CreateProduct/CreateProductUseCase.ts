@@ -1,4 +1,5 @@
-import { ProductRepository } from '../../../repositories/ProductRepository';
+import { CustomException } from '../../../exceptions/CustomException';
+import { IProductRepository } from '../../../interfaces/IProductRepository';
 
 interface ICreateProductUseCase {
   name: string;
@@ -6,15 +7,10 @@ interface ICreateProductUseCase {
   description: string;
   imagePath: string;
   price: number;
-  ingredients: [
-    {
-      name: string;
-      icon: string;
-    }
-  ];
+  ingredients: string;
 }
 export class CreateProductUseCase {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(private productRepository: IProductRepository) {}
 
   async execute({
     name,
@@ -24,13 +20,23 @@ export class CreateProductUseCase {
     price,
     ingredients,
   }: ICreateProductUseCase) {
+    let myIngredients;
+
+    try {
+      myIngredients = ingredients.trim() ? JSON.parse(ingredients) : [];
+    } catch {
+      throw new CustomException(
+        'It was not possible to parse "ingredients" to JSON.'
+      );
+    }
+
     const product = await this.productRepository.create({
       name,
       category,
       description,
       imagePath,
       price,
-      ingredients,
+      ingredients: myIngredients,
     });
 
     return product;
