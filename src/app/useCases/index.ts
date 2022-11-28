@@ -17,6 +17,8 @@ import { ListOrdersController } from './orders/ListOrders/ListOrdersController';
 import { ListOrdersUseCase } from './orders/ListOrders/ListOrdersUseCase';
 import { CreateProductController } from './products/CreateProduct/CreateProductController';
 import { CreateProductUseCase } from './products/CreateProduct/CreateProductUseCase';
+import { DeleteProductController } from './products/DeleteProduct/DeleteProductController';
+import { DeleteProductUseCase } from './products/DeleteProduct/DeleteProductUseCase';
 import { ListProductsController } from './products/ListProducts/ListProductsController';
 import { ListProductsUseCase } from './products/ListProducts/ListProductsUseCase';
 import { ListProductsByCategoryController } from './products/ListProductsByCategory/ListProductsByCategoryController';
@@ -57,6 +59,11 @@ const listProductsByCategoryController = new ListProductsByCategoryController(
   listProductsByCategoryUseCase
 );
 
+const deleteProductUseCase = new DeleteProductUseCase(productRepository);
+const deleteProductController = new DeleteProductController(
+  deleteProductUseCase
+);
+
 // order
 const listOrdersUseCase = new ListOrdersUseCase(orderRepository);
 const listOrdersController = new ListOrdersController(listOrdersUseCase);
@@ -79,6 +86,7 @@ export {
   listProductsController,
   createProductController,
   listProductsByCategoryController,
+  deleteProductController,
   listOrdersController,
   createOrderController,
   changeOrderStatusController,

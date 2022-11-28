@@ -2,7 +2,7 @@ import {
   CreateProductProps,
   IProductRepository,
 } from '../interfaces/IProductRepository';
-import { IProduct, Product } from '../models/Product';
+import { Product } from '../models/Product';
 
 export class ProductRepository implements IProductRepository {
   async create({
@@ -31,9 +31,13 @@ export class ProductRepository implements IProductRepository {
     return products;
   }
 
-  async findByCategory(categoryId: string) {
-    const products = await Product.find({}).where('category', categoryId);
+  async findByCategory(productId: string) {
+    const products = await Product.find({}).where('category', productId);
 
     return products;
+  }
+
+  async delete(productId: string): Promise<void> {
+    await Product.findOneAndDelete({ _id: productId });
   }
 }

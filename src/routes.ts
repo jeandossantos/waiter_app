@@ -12,6 +12,7 @@ import {
   changeOrderStatusController,
   deleteOrderController,
   deleteCategoryController,
+  deleteProductController,
 } from './app/useCases';
 
 export const routes = Router();
@@ -38,6 +39,10 @@ routes.get('/categories/:categoryId/products', (req, res) => {
 
 routes.post('/products', upload.single('image'), (req, res) => {
   return createProductController.handle(req, res);
+});
+
+routes.delete('/products/:productId', upload.single('image'), (req, res) => {
+  return deleteProductController.handle(req, res);
 });
 
 routes.post('/orders', (req, res) => {

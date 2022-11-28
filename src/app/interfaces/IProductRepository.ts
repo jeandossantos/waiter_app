@@ -14,5 +14,6 @@ export interface IProductRepository {
     price,
     ingredients,
   }: CreateProductProps): Promise<IProduct>;
-  findByCategory: (categoryId: string) => Promise<IProduct[]>;
+  findByCategory: (productId: string) => Promise<IProduct[]>;
+  delete(productId: string): Promise<void>;
 }
