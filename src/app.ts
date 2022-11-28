@@ -1,11 +1,12 @@
 import './app/connection/mongoose';
 import 'express-async-errors';
-import path from 'node:path';
-import express, { Request, Response, NextFunction } from 'express';
-import { routes } from './routes';
 
-import { CustomException } from './app/exceptions/CustomException';
+import path from 'node:path';
 import helmet from 'helmet';
+import express, { Request, Response, NextFunction } from 'express';
+import { ZodError } from 'zod';
+import { routes } from './routes';
+import { CustomException } from './app/exceptions/CustomException';
 
 const app = express();
 app.use(helmet());
@@ -15,7 +16,7 @@ app.use(routes);
 
 app.use(
   (
-    error: CustomException | Error,
+    error: CustomException | ZodError | Error,
     req: Request,
     res: Response,
     next: NextFunction
@@ -26,6 +27,10 @@ app.use(
         code: error.code,
         name: error.name,
       });
+    }
+
+    if (error instanceof ZodError) {
+      return res.status(400).json(error);
     }
 
     console.error(error.message || 'Unexpected error.');
